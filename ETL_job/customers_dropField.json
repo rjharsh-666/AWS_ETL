@@ -1,0 +1,42 @@
+{
+  "name" : "customers_dropField",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::224075521567:role/glue-iam",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-224075521567-ap-south-1/scripts/customers_dropField.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-224075521567-ap-south-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--conf" : "spark.eventLog.rolling.enabled=true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-224075521567-ap-south-1/temporary/"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 480,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1775833708241\":{\"DropFields\":{\"Inputs\":[\"node-1775833693257\"],\"Name\":\"Drop Fields\",\"Paths\":[[\"phone_2\"]]}},\"node-1775833693257\":{\"S3CatalogSource\":{\"AdditionalOptions\":{},\"Database\":\"sample_db\",\"Name\":\"Amazon S3\",\"PartitionPredicate\":\"\",\"Table\":\"customers\"}},\"node-1775833713722\":{\"S3GlueParquetTarget\":{\"AutoDataQuality\":{\"EvaluationContext\":\"EvaluateDataQuality_node1775833498504\",\"IsEnabled\":true},\"Compression\":\"snappy\",\"Inputs\":[\"node-1775833708241\"],\"Name\":\"Amazon S3\",\"NumberTargetPartitions\":\"0\",\"PartitionKeys\":[],\"Path\":\"s3://harsh-s3-1-bucket/transformed/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "AWS_ETL",
+    "branch" : "main",
+    "folder" : "ETL_job"
+  }
+}

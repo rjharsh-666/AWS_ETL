@@ -1,0 +1,1 @@
+SELECT * FROM "sample_db"."customers" limit 20;
